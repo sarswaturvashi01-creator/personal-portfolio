@@ -5,25 +5,59 @@
     console.log(menuOpen);
   }
 
+  let fullName = $state("");
+  let email = $state("");
+  let subject = $state("");
+  let message = $state("");
+
   let loading = $state(false);
   let sent = $state(false);
   let showForm = $state(true);
 
+  let error = $state(false);
+  let errorMessage = $state("");
+
   function sendMessage() {
-	loading = true;
-	sent = false;
+    // Check if any field is empty
+    if (
+      fullName.trim() === "" ||
+      email.trim() === "" ||
+      subject.trim() === "" ||
+      message.trim() === ""
+    ) {
+      error = true;
+      errorMessage =
+        "Please fill in all required fields before sending your message.";
+      return;
+    }
 
-	setTimeout(() => {
-		loading = false;
-		sent = true;
-		showForm = false;
-	}, 2000);
-}
+    // Reset error
+    error = false;
 
-function goBack() {
-	showForm = true;
-	sent = false;
-}
+    // Show loading
+    loading = true;
+
+    setTimeout(() => {
+      loading = false;
+
+      // Hide form
+      showForm = false;
+
+      // Show success message
+      sent = true;
+    }, 2000);
+  }
+  function goBack() {
+    showForm = true;
+    sent = false;
+    error = false;
+
+    // Clear all fields
+    fullName = "";
+    email = "";
+    subject = "";
+    message = "";
+  }
 </script>
 
 <nav class="w-full border-b border-gray-300 bg-white z-50">
@@ -705,70 +739,104 @@ function goBack() {
       </div>
     </div>
 
-    
    {#if showForm}
-<form
-  class="rounded-3xl border border-gray-300 p-6 md:p-8 space-y-5 md:space-y-6"
-  onsubmit={(e) => {
-    e.preventDefault();
-    sendMessage();
-  }}
->
-  <input
-    type="text"
-    placeholder="Full Name"
-    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
-  />
-
-  <input
-    type="email"
-    placeholder="Email Address"
-    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
-  />
-
-  <input
-    type="text"
-    placeholder="Subject"
-    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
-  />
-
-  <textarea
-    rows="6"
-    placeholder="Write your message..."
-    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
-  ></textarea>
-
-  <button
-    type="submit"
-    disabled={loading}
-    class="w-full bg-violet-600 text-white py-4 rounded-xl font-semibold hover:bg-violet-700"
+  <form
+    class="rounded-3xl p-6 md:p-8 space-y-5 md:space-y-6"
+    onsubmit={(e) => {
+      e.preventDefault();
+      sendMessage();
+    }}
   >
-    {#if loading}
-      ⏳ Sending...
-    {:else}
-      Send Message
+    <input
+      type="text"
+      placeholder="Full Name"
+      bind:value={fullName}
+      class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+    />
+
+    <input
+      type="email"
+      placeholder="Email Address"
+      bind:value={email}
+      class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+    />
+
+    <input
+      type="text"
+      placeholder="Subject"
+      bind:value={subject}
+      class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+    />
+
+    <textarea
+      rows="6"
+      placeholder="Write your message..."
+      bind:value={message}
+      class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+    ></textarea>
+
+
+    <button
+      type="submit"
+      disabled={loading}
+      class="w-full bg-violet-600 text-white py-4 rounded-xl font-semibold hover:bg-violet-700 disabled:opacity-50"
+    >
+      {#if loading}
+        ⏳ Sending...
+      {:else}
+        Send Message
+      {/if}
+    </button>
+
+
+    {#if error}
+      <div
+        class="mt-5 flex items-center gap-3 rounded-xl bg-red-50 border border-red-300 p-4"
+      >
+        <div
+          class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold"
+        >
+          ✕
+        </div>
+
+        <div>
+          <h4 class="font-semibold text-red-700">
+            Message Not Sent
+          </h4>
+
+          <p class="text-sm text-red-600">
+            {errorMessage}
+          </p>
+        </div>
+      </div>
     {/if}
-  </button>
-</form>
+
+  </form>
+
 
 {:else}
 
-<div class="rounded-3xl border border-gray-300 p-10 text-center">
-  <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-    ✅
+  <div class="rounded-3xl border border-gray-300 p-10 text-center">
+
+    <div
+      class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto"
+    >
+      ✅
+    </div>
+
+
+    <h3 class="text-3xl font-bold text-green-600 mt-6">
+      Your message has been sent!
+    </h3>
+
+    <button
+      onclick={goBack}
+      class="mt-8 bg-violet-600 text-white px-8 py-3 rounded-xl hover:bg-violet-700"
+    >
+      ← Back
+    </button>
+
   </div>
-
-  <h3 class="text-2xl font-bold mt-6">
-    Your message has been sent!
-  </h3>
-
-  <button
-    onclick={goBack}
-    class="mt-8 bg-violet-600 text-white px-8 py-3 rounded-xl"
-  >
-    ← Back
-  </button>
-</div>
 
 {/if}
   </div>

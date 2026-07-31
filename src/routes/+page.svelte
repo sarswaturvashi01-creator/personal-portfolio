@@ -4,6 +4,26 @@
     menuOpen = !menuOpen;
     console.log(menuOpen);
   }
+
+  let loading = $state(false);
+  let sent = $state(false);
+  let showForm = $state(true);
+
+  function sendMessage() {
+	loading = true;
+	sent = false;
+
+	setTimeout(() => {
+		loading = false;
+		sent = true;
+		showForm = false;
+	}, 2000);
+}
+
+function goBack() {
+	showForm = true;
+	sent = false;
+}
 </script>
 
 <nav class="w-full border-b border-gray-300 bg-white z-50">
@@ -52,13 +72,14 @@
 
 <section class="max-w-7xl mx-auto px-8 lg:px-12 py-20">
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
-
     <div class="text-center lg:text-left">
       <p class="text-base text-gray-500 mb-4 uppercase tracking-[4px]">
         My Name is
       </p>
 
-      <h1 class="text-5xl lg:text-7xl font-extrabold text-gray-900 leading-tight">
+      <h1
+        class="text-5xl lg:text-7xl font-extrabold text-gray-900 leading-tight"
+      >
         Urvashi <br />
         Sarswat
       </h1>
@@ -69,69 +90,82 @@
       </p>
 
       <div class="flex justify-center lg:justify-start gap-5 mt-10">
-        <a href="#" class="w-12 h-12 rounded-full border flex items-center justify-center">GH</a>
-        <a href="#" class="w-12 h-12 rounded-full border flex items-center justify-center">IN</a>
-        <a href="#" class="w-12 h-12 rounded-full border flex items-center justify-center">X</a>
+        <a
+          href="#"
+          class="w-12 h-12 rounded-full border flex items-center justify-center"
+          >GH</a
+        >
+        <a
+          href="#"
+          class="w-12 h-12 rounded-full border flex items-center justify-center"
+          >IN</a
+        >
+        <a
+          href="#"
+          class="w-12 h-12 rounded-full border flex items-center justify-center"
+          >X</a
+        >
       </div>
     </div>
 
     <div class="flex justify-center">
       <div class="relative">
-
         <div
-      class="absolute top-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-violet-200 blur-3xl rounded-full -z-10"
-    ></div>
+          class="absolute top-10 left-1/2 -translate-x-1/2 w-80 h-80 bg-violet-200 blur-3xl rounded-full -z-10"
+        ></div>
 
         <img
-      src="/profile.jpg"
-      alt="Profile"
-      class="relative w-[220px] lg:w-[250px] h-auto object-contain z-10"
-    />
-
+          src="/profile.jpg"
+          alt="Profile"
+          class="relative w-[220px] lg:w-[250px] h-auto object-contain z-10"
+        />
       </div>
     </div>
 
     <div class="space-y-6">
-
       <p class="uppercase tracking-[4px] text-violet-600 font-semibold">
         Latest Projects
       </p>
 
-      <div class="flex gap-4 items-center border rounded-2xl p-4 hover:shadow-lg transition">
-        <img src="https://www.shutterstock.com/image-illustration/attendance-management-system-words-on-260nw-2533341139.jpg"
-         class="w-20 h-20 rounded-xl object-cover" />
+      <div
+        class="flex gap-4 items-center border rounded-2xl p-4 hover:shadow-lg transition"
+      >
+        <img
+          src="https://www.shutterstock.com/image-illustration/attendance-management-system-words-on-260nw-2533341139.jpg"
+          class="w-20 h-20 rounded-xl object-cover"
+        />
         <div>
           <h3 class="font-bold">Attendance Management System</h3>
-          <p class="text-sm text-gray-500">
-            HTML • CSS • JavaScript • MySQL
-          </p>
+          <p class="text-sm text-gray-500">HTML • CSS • JavaScript • MySQL</p>
         </div>
       </div>
 
-      <div class="flex gap-4 items-center border rounded-2xl p-4 hover:shadow-lg transition">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5x-qRHUw_jpH2QgqmV_I0mmpMiUWUvhjxRskiOTBVO3rsFoih3tiF2jle&s=10" 
-        class="w-20 h-20 rounded-xl object-cover" />
+      <div
+        class="flex gap-4 items-center border rounded-2xl p-4 hover:shadow-lg transition"
+      >
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5x-qRHUw_jpH2QgqmV_I0mmpMiUWUvhjxRskiOTBVO3rsFoih3tiF2jle&s=10"
+          class="w-20 h-20 rounded-xl object-cover"
+        />
         <div>
           <h3 class="font-bold">Landing Page</h3>
-          <p class="text-sm text-gray-500">
-            SvelteKit • Tailwind CSS
-          </p>
+          <p class="text-sm text-gray-500">SvelteKit • Tailwind CSS</p>
         </div>
       </div>
 
-      <div class="flex gap-4 items-center border rounded-2xl p-4 hover:shadow-lg transition">
-        <img src="https://i.ytimg.com/vi/TwYKwaEjJd4/maxresdefault.jpg"
-         class="w-20 h-20 rounded-xl object-cover" />
+      <div
+        class="flex gap-4 items-center border rounded-2xl p-4 hover:shadow-lg transition"
+      >
+        <img
+          src="https://i.ytimg.com/vi/TwYKwaEjJd4/maxresdefault.jpg"
+          class="w-20 h-20 rounded-xl object-cover"
+        />
         <div>
           <h3 class="font-bold">Portfolio Website</h3>
-          <p class="text-sm text-gray-500">
-            SvelteKit • Tailwind CSS
-          </p>
+          <p class="text-sm text-gray-500">SvelteKit • Tailwind CSS</p>
         </div>
       </div>
-
     </div>
-
   </div>
 </section>
 
@@ -671,39 +705,72 @@
       </div>
     </div>
 
-    <form
-      class="rounded-3xl border border-gray-300 p-6 md:p-8 space-y-5 md:space-y-6"
-    >
-      <input
-        type="text"
-        placeholder="Full Name"
-        class="w-full border border-gray-300 rounded-xl px-4 md:px-5 py-3 md:py-4 outline-none focus:border-violet-600"
-      />
+    
+   {#if showForm}
+<form
+  class="rounded-3xl border border-gray-300 p-6 md:p-8 space-y-5 md:space-y-6"
+  onsubmit={(e) => {
+    e.preventDefault();
+    sendMessage();
+  }}
+>
+  <input
+    type="text"
+    placeholder="Full Name"
+    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+  />
 
-      <input
-        type="email"
-        placeholder="Email Address"
-        class="w-full border border-gray-300 rounded-xl px-4 md:px-5 py-3 md:py-4 outline-none focus:border-violet-600"
-      />
+  <input
+    type="email"
+    placeholder="Email Address"
+    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+  />
 
-      <input
-        type="text"
-        placeholder="Subject"
-        class="w-full border border-gray-300 rounded-xl px-4 md:px-5 py-3 md:py-4 outline-none focus:border-violet-600"
-      />
+  <input
+    type="text"
+    placeholder="Subject"
+    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+  />
 
-      <textarea
-        rows="6"
-        placeholder="Write your message..."
-        class="w-full border border-gray-300 rounded-xl px-5 py-4 outline-none focus:border-violet-600"
-      ></textarea>
+  <textarea
+    rows="6"
+    placeholder="Write your message..."
+    class="w-full border border-gray-300 rounded-xl px-4 py-3 outline-none focus:border-violet-600"
+  ></textarea>
 
-      <button
-        class="w-full bg-violet-600 text-white py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base hover:bg-violet-700 transition"
-      >
-        Send Message
-      </button>
-    </form>
+  <button
+    type="submit"
+    disabled={loading}
+    class="w-full bg-violet-600 text-white py-4 rounded-xl font-semibold hover:bg-violet-700"
+  >
+    {#if loading}
+      ⏳ Sending...
+    {:else}
+      Send Message
+    {/if}
+  </button>
+</form>
+
+{:else}
+
+<div class="rounded-3xl border border-gray-300 p-10 text-center">
+  <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+    ✅
+  </div>
+
+  <h3 class="text-2xl font-bold mt-6">
+    Your message has been sent!
+  </h3>
+
+  <button
+    onclick={goBack}
+    class="mt-8 bg-violet-600 text-white px-8 py-3 rounded-xl"
+  >
+    ← Back
+  </button>
+</div>
+
+{/if}
   </div>
 </section>
 
